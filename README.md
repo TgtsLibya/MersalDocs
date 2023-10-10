@@ -111,11 +111,11 @@ POST /api/orders/{orderMersalId}/message
 
 #### Responses
 
-| Status Code        | Body Type  | Description                                                |
-| ------------------ | ---------- | ---------------------------------------------------------- |
-| 200 (OK)           | N/A        | The message has successfully been submitted to the `Order` |
-| 401 (UNAUTHORIZED) | `ApiError` | Invalid token                                              |
-| 404 (NOT FOUND)    | `ApiError` | Given ID does not match any `Order`                        |
+| Status Code        | Body Type             | Description                                                |
+| ------------------ | --------------------- | ---------------------------------------------------------- |
+| 200 (OK)           | N/A                   | The message has successfully been submitted to the `Order` |
+| 401 (UNAUTHORIZED) | [ApiError](#apierror) | Invalid token                                              |
+| 404 (NOT FOUND)    | [ApiError](#apierror) | Given ID does not match any `Order`                        |
 
 ## Accept Order
 
@@ -137,11 +137,11 @@ N/A
 
 #### Responses
 
-| Status Code        | Body Type  | Description                                                           |
-| ------------------ | ---------- | --------------------------------------------------------------------- |
-| 200 (OK)           | N/A        | The `Order` has successfully been accepted and is now pending payment |
-| 401 (UNAUTHORIZED) | `ApiError` | Invalid token                                                         |
-| 404 (NOT FOUND)    | `ApiError` | Given ID does not match any `Order`                                   |
+| Status Code        | Body Type             | Description                                                           |
+| ------------------ | --------------------- | --------------------------------------------------------------------- |
+| 200 (OK)           | N/A                   | The `Order` has successfully been accepted and is now pending payment |
+| 401 (UNAUTHORIZED) | [ApiError](#apierror) | Invalid token                                                         |
+| 404 (NOT FOUND)    | [ApiError](#apierror) | Given ID does not match any `Order`                                   |
 
 ## Reject Order
 
@@ -165,11 +165,11 @@ POST /api/orders/{orderMersalId}/reject
 
 #### Responses
 
-| Status Code        | Body Type  | Description                                                             |
-| ------------------ | ---------- | ----------------------------------------------------------------------- |
-| 200 (OK)           | N/A        | The `Order` has successfully been rejected and is now back into `Draft` |
-| 401 (UNAUTHORIZED) | `ApiError` | Invalid token                                                           |
-| 404 (NOT FOUND)    | `ApiError` | Given ID does not match any `Order`                                     |
+| Status Code        | Body Type             | Description                                                             |
+| ------------------ | --------------------- | ----------------------------------------------------------------------- |
+| 200 (OK)           | N/A                   | The `Order` has successfully been rejected and is now back into `Draft` |
+| 401 (UNAUTHORIZED) | [ApiError](#apierror) | Invalid token                                                           |
+| 404 (NOT FOUND)    | [ApiError](#apierror) | Given ID does not match any `Order`                                     |
 
 ## Fulfill Order
 
@@ -193,8 +193,20 @@ POST /api/orders/{orderMersalId}/fulfill
 
 #### Responses
 
-| Status Code        | Body Type  | Description                                                                                                                                                                     |
-| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200 (OK)           | N/A        | The `Order` has successfully been fulfilled and is now ready for pickup by the customer (**and documents attached in the body request can be viewed by the customer directly**) |
-| 401 (UNAUTHORIZED) | `ApiError` | Invalid token                                                                                                                                                                   |
-| 404 (NOT FOUND)    | `ApiError` | Given ID does not match any `Order`                                                                                                                                             |
+| Status Code        | Body Type             | Description                                                                                                                                                                     |
+| ------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200 (OK)           | N/A                   | The `Order` has successfully been fulfilled and is now ready for pickup by the customer (**and documents attached in the body request can be viewed by the customer directly**) |
+| 401 (UNAUTHORIZED) | [ApiError](#apierror) | Invalid token                                                                                                                                                                   |
+| 404 (NOT FOUND)    | [ApiError](#apierror) | Given ID does not match any `Order`                                                                                                                                             |
+
+### Data Types
+
+#### ApiError
+
+```csharp
+public class ApiError
+{
+    public string Code { get; set; };
+    public string Message { get; set; };
+}
+```
